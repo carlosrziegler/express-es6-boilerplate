@@ -1,0 +1,89 @@
+{
+  "name": "prea-quant-maps",
+  "version": "1.0.0",
+  "description": "Using latest JavaScript features on the server",
+  "repository": "https://github.com/vmasto/express-babel",
+  "license": "MIT",
+  "author": "Carlos Ziegler",
+  "main": "dist/index.js",
+  "scripts": {
+    "prestart": "npm run -s build",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.js --exec \"node -r dotenv/config -r babel-register\"",
+    "clean": "rimraf dist",
+    "build": "npm run clean && mkdir -p dist && babel src -s -D -d dist",
+    "test": "jest --watch",
+    "lint": "eslint --ext .js,.json,.eslintrc, --fix ."
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-class-properties"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "import",
+      "jest"
+    ],
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "jest/no-focused-tests": 2,
+      "jest/no-identical-title": 2
+    }
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.19.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^27.0.6",
+    "babel-register": "^6.26.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-json-format": "^2.0.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-watch": "^7.0.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.3"
+  }
+}
